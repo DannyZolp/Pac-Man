@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Rigidbody m_Rigidbody;
+
     void Start()
     {
-        
+        //Fetch the Rigidbody from the GameObject with this script attached
+        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (Input.GetKey(KeyCode.W))
+        {
+            m_Rigidbody.velocity = (transform.position + Vector3.forward);
+        } else if (Input.GetKey(KeyCode.A))
+        {
+            m_Rigidbody.velocity = (transform.position + Vector3.left);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            m_Rigidbody.velocity = (transform.position + Vector3.back);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            m_Rigidbody.velocity = (transform.position + Vector3.right);
+        }
     }
 }
