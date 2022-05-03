@@ -29,7 +29,7 @@ public class PacMacScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.theScoreTextMesh.text = "WOOT!!!";
+        //this.theScoreTextMesh.text = "WOOT!!!";
     }
 
     // Update is called once per frame
