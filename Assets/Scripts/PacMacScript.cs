@@ -18,6 +18,9 @@ public class PacMacScript : MonoBehaviour
     private bool goRight = false;
     private bool goLeft = false;
 
+    private bool isCracked = false;
+    private int isCrackedCycles = 0;
+
     void Awake()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
@@ -32,8 +35,22 @@ public class PacMacScript : MonoBehaviour
         this.theScoreTextMesh.text = "WOOT!!!";
     }
 
+    private void FixedUpdate()
+    {
+        if (isCracked)
+        {
+            isCrackedCycles++;
+        }
+
+        if (isCrackedCycles >= 50 * 10)
+        {
+            isCracked = false;
+            isCrackedCycles = 0;
+        }
+    }
+
     // Update is called once per frame
-    
+
     void Update()
     {
         this.pinkGhostAgent.SetDestination(this.gameObject.transform.position);
@@ -93,6 +110,23 @@ public class PacMacScript : MonoBehaviour
             goRight = true;
             goLeft = false;
             
+        }
+    }
+
+    public void ActivateCrackedMode()
+    {
+        isCracked = true;
+    }
+
+    public void TryToKillMeIDareYou(GameObject killer)
+    {
+        if (!isCracked)
+        {
+            Debug.Log("KILL!");
+            Destroy(this.gameObject);
+        } else
+        {
+            Destroy(killer);
         }
     }
 }
